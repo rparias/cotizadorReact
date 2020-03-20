@@ -25,3 +25,7 @@ export function calculateByBrand(brand) {
 export function calculateByPlan(plan) {
   return plan === 'basico' ? 1.2 : 1.5;
 }
+
+export function capitalizeFirstLetter(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
