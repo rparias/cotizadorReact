@@ -56,7 +56,7 @@ const Error = styled.div`
   margin-bottom: 2rem;
 `;
 
-function Form() {
+function Form({ updateSummary }) {
   const [data, updateData] = useState({
     brand: '',
     year: '',
@@ -96,6 +96,11 @@ function Form() {
 
     // Total
     totalResult = parseFloat(totalResult).toFixed(2);
+
+    updateSummary({
+      quotation: totalResult,
+      data
+    });
   };
 
   const { brand, year, plan } = data;

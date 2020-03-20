@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header';
 import styled from '@emotion/styled';
 import Form from './components/Form';
@@ -14,11 +14,13 @@ const ContainerForm = styled.div`
 `;
 
 function App() {
+  const [summary, updateSummary] = useState({});
+
   return (
     <Container>
       <Header title="Cotizador de seguros" />
       <ContainerForm>
-        <Form></Form>
+        <Form updateSummary={updateSummary} />
       </ContainerForm>
     </Container>
   );
