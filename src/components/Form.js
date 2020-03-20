@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
+import { getDifferenceYears } from '../helper';
+
+const INITIAL_BASE = 2000;
 
 const Field = styled.div`
   display: flex;
@@ -61,9 +64,8 @@ function Form() {
   const handleOnChange = e => {
     updateData({
       ...data,
-      [e.target.name]: [e.target.value]
+      [e.target.name]: e.target.value
     });
-    console.log([e.target.value]);
   };
 
   const handleSubmit = e => {
@@ -74,9 +76,13 @@ function Form() {
     }
     updateError(false);
 
+    let totalResult = INITIAL_BASE;
+
     // obtener la diferencia de años
+    const differenceYears = getDifferenceYears(year);
 
     // por cada año hay que restar el 3%
+    totalResult -= (differenceYears * 3 * totalResult) / 100;
 
     // Americano 15%
     // Asiatico 5%
@@ -88,11 +94,11 @@ function Form() {
     // Total
   };
 
+  const { brand, year, plan } = data;
+
   const isInvalidData = () => {
     return brand.trim() === '' || year.trim() === '' || plan.trim() === '';
   };
-
-  const { brand, year, plan } = data;
 
   return (
     <form onSubmit={handleSubmit}>
