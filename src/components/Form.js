@@ -56,7 +56,7 @@ const Error = styled.div`
   margin-bottom: 2rem;
 `;
 
-function Form({ updateSummary }) {
+function Form({ updateSummary, updateIsLoading }) {
   const [data, updateData] = useState({
     brand: '',
     year: '',
@@ -97,10 +97,14 @@ function Form({ updateSummary }) {
     // Total
     totalResult = parseFloat(totalResult).toFixed(2);
 
-    updateSummary({
-      quotation: totalResult,
-      data
-    });
+    updateIsLoading(true);
+    setTimeout(() => {
+      updateIsLoading(false);
+      updateSummary({
+        quotation: totalResult,
+        data
+      });
+    }, 200);
   };
 
   const { brand, year, plan } = data;

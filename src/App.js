@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import Form from './components/Form';
 import Summary from './components/Summary';
 import Result from './components/Result';
+import Spinner from './components/Spinner';
 
 const Container = styled.div`
   max-width: 600px;
@@ -25,15 +26,24 @@ function App() {
     }
   });
 
+  const [isLoading, updateIsLoading] = useState(false);
+
   const { quotation, data } = summary;
 
   return (
     <Container>
       <Header title="Cotizador de seguros" />
       <ContainerForm>
-        <Form updateSummary={updateSummary} />
-        <Summary data={data} />
-        <Result quotation={quotation} />
+        <Form updateSummary={updateSummary} updateIsLoading={updateIsLoading} />
+
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <div>
+            <Summary data={data} />
+            <Result quotation={quotation} />
+          </div>
+        )}
       </ContainerForm>
     </Container>
   );
