@@ -40,12 +40,23 @@ const Button = styled.button`
   }
 `;
 
+const Error = styled.div`
+  background-color: red;
+  color: white;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+`;
+
 function Form() {
   const [data, updateData] = useState({
     brand: '',
     year: '',
     plan: ''
   });
+
+  const [error, updateError] = useState(false);
 
   const handleOnChange = e => {
     updateData({
@@ -55,10 +66,37 @@ function Form() {
     console.log([e.target.value]);
   };
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    if (isInvalidData()) {
+      updateError(true);
+      return;
+    }
+    updateError(false);
+
+    // obtener la diferencia de años
+
+    // por cada año hay que restar el 3%
+
+    // Americano 15%
+    // Asiatico 5%
+    // Europeo 30%
+
+    // Basico aumenta 20%
+    // Completo aumenta 50%
+
+    // Total
+  };
+
+  const isInvalidData = () => {
+    return brand.trim() === '' || year.trim() === '' || plan.trim() === '';
+  };
+
   const { brand, year, plan } = data;
 
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
+      {error ? <Error>Todos los campos son obligatorios</Error> : null}
       <Field>
         <Label>Marca</Label>
         <Select name="brand" value={brand} onChange={handleOnChange}>
@@ -106,7 +144,7 @@ function Form() {
         Completo
       </Field>
 
-      <Button type="button">Cotizar</Button>
+      <Button type="submit">Cotizar</Button>
     </form>
   );
 }
