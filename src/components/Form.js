@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { getDifferenceYears, calculateByBrand } from '../helper';
+import {
+  getDifferenceYears,
+  calculateByBrand,
+  calculateByPlan
+} from '../helper';
 
 const INITIAL_BASE = 2000;
 
@@ -86,12 +90,12 @@ function Form() {
 
     // Americano 15%, Asiatico 5%, Europeo 30%
     totalResult *= calculateByBrand(brand);
-    //console.log(totalResult);
 
-    // Basico aumenta 20%
-    // Completo aumenta 50%
+    // Basico aumenta 20%, Completo aumenta 50%
+    totalResult *= calculateByPlan(plan);
 
     // Total
+    totalResult = parseFloat(totalResult).toFixed(2);
   };
 
   const { brand, year, plan } = data;

@@ -21,3 +21,7 @@ export function calculateByBrand(brand) {
 
   return increase;
 }
+
+export function calculateByPlan(plan) {
+  return plan === 'basico' ? 1.2 : 1.5;
+}
