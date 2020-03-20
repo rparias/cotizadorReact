@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from '@emotion/styled';
-import { getDifferenceYears } from '../helper';
+import { getDifferenceYears, calculateByBrand } from '../helper';
 
 const INITIAL_BASE = 2000;
 
@@ -84,9 +84,9 @@ function Form() {
     // por cada año hay que restar el 3%
     totalResult -= (differenceYears * 3 * totalResult) / 100;
 
-    // Americano 15%
-    // Asiatico 5%
-    // Europeo 30%
+    // Americano 15%, Asiatico 5%, Europeo 30%
+    totalResult *= calculateByBrand(brand);
+    //console.log(totalResult);
 
     // Basico aumenta 20%
     // Completo aumenta 50%
